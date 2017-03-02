@@ -1,0 +1,115 @@
+﻿.layout-wrapper .main-wrapper {
+    background: url(bg.jpg) no-repeat;
+    width: 1920px;
+    height: 800px;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.layout-wrapper .main-wrapper.with-footer {
+    background: url(bg-with-footer.jpg) no-repeat;
+}
+
+    /* profile */
+    .layout-wrapper .main-wrapper .profile {
+        position: absolute;
+        background: url(bg-profile.png) center center no-repeat;
+        font-size: 75px;
+        color: #fff;
+        width: 900px;
+        height: 255px;
+        left: 525px;
+        top: 218px;
+    }
+
+        .layout-wrapper .main-wrapper .profile #fullname {
+            text-align: center;
+            margin-top:32px;
+            width: 900px;
+            height: 85px;
+            display: block;
+            /* background:blue; */
+        }
+
+        .layout-wrapper .main-wrapper .profile .arabicfullname,
+        .layout-wrapper .main-wrapper .profile .fullname {
+        }
+
+        .layout-wrapper .main-wrapper .profile .graduateid {
+            display: none;
+        }
+
+        /* academic */
+        .layout-wrapper .main-wrapper .profile .academic {
+            font-size: 30px;
+            color: #fff;
+            text-align: center;
+            position: absolute;
+            bottom: 32px;
+            width: 100%;
+        }
+
+            .layout-wrapper .main-wrapper .profile .academic .major,
+            .layout-wrapper .main-wrapper .profile .academic .program {
+                display: block;
+                width: 100%;
+                font-size: 24px;
+                font-weight: bold;
+                text-shadow: none;
+                text-transform: uppercase;
+                font-family: Arial;
+            }
+
+
+            .layout-wrapper .main-wrapper .profile .academic .major {
+                font-weight: normal;
+            }
+
+    /* media */
+    .layout-wrapper .main-wrapper .media {
+        position: absolute;
+        background: url(bg-media.png) no-repeat;
+        top: 0px;
+        left: 55px;
+        width: 407px;
+        height: 681px;
+    }
+
+        .layout-wrapper .main-wrapper .media img {
+            display: inline-block;
+            position: relative;
+            margin-top: 203px;
+            margin-left: 5px;
+            width: 398px;
+            height: 398px;
+        }
+
+
+        .layout-wrapper .main-wrapper .media audio {
+            display: inline-block;
+            visibility: hidden;
+            width: 100%;
+            height: 20px;
+            line-height: 20px;
+        }
+
+        .layout-wrapper .main-wrapper .media .merit {
+            display: inline-block;
+            padding-left: 20px;
+            font-size: 22px;
+            color: #fff;
+            text-transform: uppercase;
+            font-family: Arial;
+            line-height: 22px;
+        }
+
+
+    .layout-wrapper .main-wrapper .school-flag {
+        display: block;
+        position: absolute;
+        right: 27px;
+        top: 0;
+        width:410px;
+        height:474px;
+    }

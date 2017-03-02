@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <title>Graduates</title>
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/angular-resource.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/site.js"></script>
+    <script src="/app.js"></script>
+
+    <link rel="stylesheet" href="/css/site.css" type="text/css" />
+
+</head>
+<body ng-cloak class="layout-wrapper">
+    <div ng-controller="controller">
+
+        <div class="main-wrapper {{Graduate.isBackgroundWithFooter}}">
+
+            <div class="container" ng-show="Graduate.GraduateId != null">
+
+                <div class="media">
+                    <img ng-show="Graduate.GraduatePicture != null" ng-src="{{Graduate.GraduatePicture}}" />
+                    <audio preload="auto" ng-show="Graduate.GraduateSound != null" ng-src="{{Graduate.GraduateSound}}" autoplay controls></audio>
+
+                    <span class="merit" ng-show="Graduate.Merit != null">{{Graduate.Merit}}</span>
+                </div>
+
+                <div class="profile">
+                    <span class="graduateid" ng-show="Graduate.GraduateId != null">{{Graduate.GraduateId}}</span>
+
+                    <div ng-if="Graduate.isFullname == 'NO'">
+                        <span class="first" ng-show="Graduate.FirstName != null">{{Graduate.FirstName}}</span>
+                        <span class="middle" ng-show="Graduate.MiddleName != null">{{Graduate.MiddleName}}</span>
+                        <span class="last" ng-show="Graduate.LastName != null">{{Graduate.LastName}}</span>
+                    </div>
+
+                    <div id="fullname" ng-if="Graduate.isFullname == 'YES'">
+                        <span id="englishFullname" ng-if="Graduate.Arabic == 0" class="fullname" ng-show="Graduate.Fullname != null">{{Graduate.Fullname}}</span>
+                        <span id="arabicFullname" ng-if="Graduate.Arabic == 1" dir="rtl" class="arabicfullname" ng-show="Graduate.ArabicFullname != null">{{Graduate.ArabicFullname}}</span>
+                    </div>
+
+                    <div class="academic">
+                        <span class="program" ng-show="Graduate.Program != null">{{Graduate.Program}}</span>
+                        <span class="major" ng-show="Graduate.Major != null">{{Graduate.Major}}</span>
+                    </div>
+
+                </div>
+
+                <div class="school-flag">
+                    <img class="flag" ng-show="Graduate.GraduateImageSystemTemplateFlag != null" ng-src="{{Graduate.GraduateImageSystemTemplateFlag}}" />
+                    <img style="visibility:hidden" ng-show="Graduate.GraduateImageSystemTemplateDate != null" ng-src="{{Graduate.GraduateImageSystemTemplateDate}}" />
+                    <span id="date" class="date" ng-show="Graduate.GraduateImageSystemTemplateDate != null">{{Graduate.GraduateImageSystemTemplateDate}}</span>
+                    <img style="visibility:hidden" ng-show="Graduate.GraduateImageSystemTemplateMaple != null" ng-src="{{Graduate.GraduateImageSystemTemplateMaple}}" />
+                    <span id="maple" class="maple" ng-show="Graduate.GraduateImageSystemTemplateMaple != null">{{Graduate.GraduateImageSystemTemplateMaple}}</span>
+                </div>
+
+
+            </div>
+
+        </div>
+
+        
+        <!-- link ng-href="{{Graduate.GraduateImageSystemTemplateCss}}" type="text/css" rel="stylesheet" / -->
+
+    </div>
+
+    <link href="/images/system/1920x800/StyleSheet.css" type="text/css" rel="stylesheet" />
+
+</body>
+</html> 

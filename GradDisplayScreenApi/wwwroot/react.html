@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>React Test</title>
+</head>
+
+<link rel="stylesheet" href="/css/site.css" type="text/css" />
+<link href="/images/system/1920x800/StyleSheet.css" type="text/css" rel="stylesheet" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="/js/site.js"></script>
+
+    <script type="text/jsx">
+
+        
+        var Teleprompt = React.createClass({
+            
+            getInitialState: function() {
+                return { oldGraduate: [] };
+            },
+        
+            componentDidMount: function() {
+                setInterval(this.loadFromServer, 500);
+            },
+
+            screenChange: function() {
+                return "changed";
+            },
+
+            getOldGraduate: function() {
+                return this.state.oldGraduate;
+            },
+
+            loadFromServer: function() {
+                fetch('/api/graduate').then(response => response.json()).then(json => {
+                                    
+                    if (json != null) {
+                        var oldGraduate = this.getOldGraduate();
+                        if (json.graduateId != oldGraduate.graduateId) {
+                            console.log("json: " + json.graduateId + " ------------------------------ currentDisplay: " + this.state.oldGraduate.graduateId);
+                            this.setState( { oldGraduate : json } );
+                            console.log('not equal');
+                        }
+              
+                    }
+            
+                });
+            }, 
+
+            render: function() {
+                return <div>
+                        <h1>{this.getOldGraduate()}</h1>
+                        
+                     </div>;
+            }
+        });
+
+        React.render(<Teleprompt />, document.getElementById("content"));
+
+        
+
+    </script>
+<body class="layout-wrapper">
+    <div class="main-wrapper">>
+        <div id="content"></div>
+   </div>
+
+    <div class="school-flag">
+        <span id="date" class="date">/images/system/1920x800/maple-architecture.png</span>
+        <span id="maple" class="maple">/images/system/1920x800/date-architecture.png</span>
+    </div>
+
+</body>
+</html>

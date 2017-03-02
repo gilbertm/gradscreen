@@ -1,0 +1,42 @@
+﻿
+
+
+<hr />
+<div class="test">
+    var TelepromptGraduate = React.createClass({
+    getInitialState: function() {
+    return { graduate: 0 };
+    },
+
+    componentDidMount: function() {
+    this.getGraduate();
+    // setInterval(this.loadFromServer, 2000);
+    },
+
+    /* getGraduate: function() {
+    return this.state.graduate;
+    },
+
+    loadFromServer: function() {
+    var _this = this;
+    $.ajax({
+    url: '/api/graduate',
+    dataType: 'json',
+    cache: false,
+    success: function(g) {
+    this.setState({graduate: 2});
+    }.bind(this),
+    error: function(xhr, status, err) {
+    console.error('/api/graduate', status, err.toString());
+    }.bind(this)
+    });
+    }, */
+
+    render: function() {
+    return
+    <div>
+        <h1>Test</h1>
+    </div>;
+    }
+    });
+</div>
