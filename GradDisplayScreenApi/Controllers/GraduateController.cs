@@ -37,7 +37,7 @@ namespace GradDisplayScreenApi.Controllers
 
         // GET: api/values
         [HttpGet]
-        public TelepromptViewModel Get()
+        public IActionResult Get()
         {
             string voicePerson = null;
             string voiceExtra = null;
@@ -211,72 +211,12 @@ namespace GradDisplayScreenApi.Controllers
 
                     }
 
-                    return vGraduate;
+                    return Json(vGraduate);
                 }
 
             }
 
-            // return a default set
-            TelepromptViewModel blankTeleprompt = new TelepromptViewModel()
-            {
-                GraduateId = null,
-                GraduateScannerId = null,
-                Status = 0,
-                School = null,
-                Program = null,
-                Major = null,
-                Merit = null,
-                FirstName = null,
-                LastName = null,
-                MiddleName = null,
-                Fullname = null,
-                ArabicFullname = null,
-                Arabic = 0
-            };
-
-            string dirPathForBlank = String.Concat(_hostEnvironment.WebRootPath, "\\", Configuration["Custom:Template:data"], "\\", Configuration["Custom:Template:Root:data"], "\\", Configuration["Custom:Template:Root:Default:data"], "\\");
-
-            // system template css
-            if (System.IO.Directory.Exists(dirPathForBlank))
-            {
-                // css
-                string strGraduateImageSystemTemplateCss = String.Concat("/", Configuration["Custom:Template:data"], "/", Configuration["Custom:Template:Root:data"], "/", Configuration["Custom:Template:Root:Default:data"], "/", "StyleSheet.css");
-                if (System.IO.File.Exists(String.Concat(dirPathForBlank, "\\", "StyleSheet.css")))
-                {
-                    blankTeleprompt.GraduateImageSystemTemplateCss = strGraduateImageSystemTemplateCss;
-                }
-
-                // image group
-                string strTemplateImageGroup = "default";
-
-                // school images
-                string strGraduateImageSystemTemplateFlag = String.Concat("/", Configuration["Custom:Template:data"], "/", Configuration["Custom:Template:Root:data"], "/", Configuration["Custom:Template:Root:Default:data"]);
-                string strGraduateImageSystemTemplateMaple = String.Concat("/", Configuration["Custom:Template:data"], "/", Configuration["Custom:Template:Root:data"], "/", Configuration["Custom:Template:Root:Default:data"]);
-                string strGraduateImageSystemTemplateDate = String.Concat("/", Configuration["Custom:Template:data"], "/", Configuration["Custom:Template:Root:data"], "/", Configuration["Custom:Template:Root:Default:data"]);
-
-                strGraduateImageSystemTemplateFlag = String.Concat(strGraduateImageSystemTemplateFlag, "/", "flag-", strTemplateImageGroup, ".png");
-                strGraduateImageSystemTemplateMaple = String.Concat(strGraduateImageSystemTemplateMaple, "/", "date-", strTemplateImageGroup, ".png");
-                strGraduateImageSystemTemplateDate = String.Concat(strGraduateImageSystemTemplateDate, "/", "maple-", strTemplateImageGroup, ".png");
-
-                if (System.IO.File.Exists(String.Concat(dirPathForBlank, "flag-", strTemplateImageGroup, ".png")))
-                {
-                    blankTeleprompt.GraduateImageSystemTemplateFlag = strGraduateImageSystemTemplateFlag;
-                }
-
-                if (System.IO.File.Exists(String.Concat(dirPathForBlank, "date-", strTemplateImageGroup, ".png")))
-                {
-                    blankTeleprompt.GraduateImageSystemTemplateDate = strGraduateImageSystemTemplateDate;
-                }
-
-                if (System.IO.File.Exists(String.Concat(dirPathForBlank, "maple-", strTemplateImageGroup, ".png")))
-                {
-                    blankTeleprompt.GraduateImageSystemTemplateMaple = strGraduateImageSystemTemplateMaple;
-                }
-            }
-
-
-
-            return blankTeleprompt;
+            return Json(null);
         }
     }
 }

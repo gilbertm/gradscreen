@@ -20,7 +20,7 @@
         var Teleprompt = React.createClass({
             
             getInitialState: function() {
-                return { oldGraduate: [] };
+                return { beingDisplayedGraduate: [], beingDisplayedGraduateId: 0 };
             },
         
             componentDidMount: function() {
@@ -31,30 +31,42 @@
                 return "changed";
             },
 
-            getOldGraduate: function() {
-                return this.state.oldGraduate;
+            getBeingDisplayedGraduate: function() {
+                return this.state.beingDisplayedGraduate;
             },
 
             loadFromServer: function() {
                 fetch('/api/graduate').then(response => response.json()).then(json => {
-                                    
-                    if (json != null) {
-                        var oldGraduate = this.getOldGraduate();
-                        if (json.graduateId != oldGraduate.graduateId) {
-                            console.log("json: " + json.graduateId + " ------------------------------ currentDisplay: " + this.state.oldGraduate.graduateId);
-                            this.setState( { oldGraduate : json } );
-                            console.log('not equal');
+                   
+                        // trigger state change
+                        // empty graduate teleprompt (screen data)
+                        if (json == null) {
+                            this.setState( { beingDisplayedGraduate : null } );
                         }
+
+                        if (json != null) {
+                            var beingDisplayedGraduate = this.getBeingDisplayedGraduate();
+
+                            // trigger state change
+                            // update the currently displayed graduate with the json result
+                            if (json.graduateId != beingDisplayedGraduate) {
+                                this.setState( { beingDisplayedGraduate : json } );
+                            }
               
-                    }
+                        }
             
                 });
             }, 
 
             render: function() {
                 return <div>
-                        <h1>{this.getOldGraduate()}</h1>
-                        
+                        {this.getBeingDisplayedGraduate() ? 
+                        (
+                            <h1>{this.getBeingDisplayedGraduate().graduateId}</h1>
+                        ) : (
+                                <h1>Nothing</h1>
+                            )
+                        }
                      </div>;
             }
         });
