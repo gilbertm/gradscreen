@@ -93,7 +93,7 @@
             // starImage.style = "transform : rotate(" + Math.floor((Math.random() * 10)) + "deg);";
             var imageRotation = "rotate(" + Math.floor((Math.random() * 180)) + "deg)";
 
-            var flake = $('<div>').text(' ').html(starImage).css({
+            var flake = $('<div class="flake">').text(' ').html(starImage).css({
                 position: 'fixed',
                 left: curX,
                 top: curY,

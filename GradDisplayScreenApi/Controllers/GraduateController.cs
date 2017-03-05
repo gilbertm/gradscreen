@@ -42,16 +42,10 @@ namespace GradDisplayScreenApi.Controllers
             string voicePerson = null;
             string voiceExtra = null;
             bool isFullName = false;
-            bool isBackgroundWithFooter = false;
 
             if (!String.IsNullOrEmpty(Configuration["Custom:Fields:fullname"]))
             {
                 isFullName = Configuration["Custom:Fields:fullname"] == "yes" ? true : false;
-            }
-
-            if (!String.IsNullOrEmpty(Configuration["Custom:Template:Root:Default:withfooter"]))
-            {
-                isBackgroundWithFooter = Configuration["Custom:Template:Root:Default:withfooter"] == "yes" ? true : false;
             }
 
             if (!String.IsNullOrEmpty(Configuration["Custom:Voice:person"]))
@@ -118,20 +112,25 @@ namespace GradDisplayScreenApi.Controllers
                             switch (vGraduate.School.ToString().Trim())
                             {
                                 case "School of Liberal Arts and Sciences":
+                                case "School of Liberal Arts & Sciences":
                                     strTemplateImageGroup = "liberal";
                                     break;
                                 case "School of Business Administration":
                                     strTemplateImageGroup = "business";
                                     break;
                                 case "School of Architecture and Interior Design":
+                                case "School of Architecture & Interior Design":
                                     strTemplateImageGroup = "architecture";
                                     break;
                                 case "School of Environment and Health Sciences":
+                                case "School of Environment & Health Sciences":
                                     strTemplateImageGroup = "environment";
                                     break;
                                 case "School of Engineering, Applied Science and Technology":
+                                case "School of Engineering, Applied Science & Technology":
                                     strTemplateImageGroup = "engineering";
                                     break;
+                                case "School of Communication and Media Studies":
                                 case "School of Communication & Media Studies":
                                     strTemplateImageGroup = "communication";
                                     break;
@@ -193,6 +192,9 @@ namespace GradDisplayScreenApi.Controllers
                         if (System.IO.File.Exists(filePathImage))
                         {
                             vGraduate.GraduatePicture = String.Concat("/", Configuration["Custom:Resources:data"], "/", Configuration["Custom:Resources:Images:data"], "/", vGraduate.GraduateId, ".jpg");
+                        } else
+                        {
+                            vGraduate.GraduatePicture = String.Concat("/", Configuration["Custom:Resources:data"], "/", Configuration["Custom:Resources:Images:data"], "/","default", ".jpg");
                         }
 
                         // is fullname
@@ -202,12 +204,6 @@ namespace GradDisplayScreenApi.Controllers
                         {
                             vGraduate.isFullname = "YES";
                         }
-
-                        if (isBackgroundWithFooter)
-                        {
-                            vGraduate.isBackgroundWithFooter = "with-footer";
-                        }
-
 
                     }
 

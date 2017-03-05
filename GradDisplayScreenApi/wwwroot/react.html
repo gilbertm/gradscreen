@@ -7,8 +7,7 @@
 </head>
 
 <link rel="stylesheet" href="/css/site.css" type="text/css" />
-<link href="/images/system/1920x800/StyleSheet.css" type="text/css" rel="stylesheet" />
-
+<link rel="stylesheet" href="/images/system/1920x800/StyleSheet.css" type="text/css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -20,24 +19,25 @@
         var Teleprompt = React.createClass({
             
             getInitialState: function() {
-                return { beingDisplayedGraduate: [], beingDisplayedGraduateId: 0 };
+                return { beingDisplayedGraduate: [], beingDisplayedGraduateId: 0, firstRun: 1 };
             },
         
             componentDidMount: function() {
                 setInterval(this.loadFromServer, 500);
             },
 
-            screenChange: function() {
-                return "changed";
-            },
-
             getBeingDisplayedGraduate: function() {
                 return this.state.beingDisplayedGraduate;
             },
 
+            getFirstRun: function() {
+                return this.state.firstRun;
+            },
+
             loadFromServer: function() {
+
                 fetch('/api/graduate').then(response => response.json()).then(json => {
-                   
+
                         // trigger state change
                         // empty graduate teleprompt (screen data)
                         if (json == null) {
@@ -45,6 +45,21 @@
                         }
 
                         if (json != null) {
+
+                            var fetch = this;
+
+                            $.ajax({
+                                type: 'POST',
+                                url: '/api/config/set/initialscreen',
+                                data: { "initialscreen" : 0 }
+                            })
+                            .done(function(response) {
+                                fetch.setState( { firstRun : 0 } );
+                            })
+                            .fail(function(error) {
+                                console.log(error);
+                            });
+
                             var beingDisplayedGraduate = this.getBeingDisplayedGraduate();
 
                             // trigger state change
@@ -52,39 +67,149 @@
                             if (json.graduateId != beingDisplayedGraduate) {
                                 this.setState( { beingDisplayedGraduate : json } );
                             }
-              
+
                         }
             
                 });
             }, 
 
             render: function() {
-                return <div>
-                        {this.getBeingDisplayedGraduate() ? 
-                        (
-                            <h1>{this.getBeingDisplayedGraduate().graduateId}</h1>
-                        ) : (
-                                <h1>Nothing</h1>
-                            )
+                var css,
+                    media, 
+                    fullname, 
+                    credential, 
+                    academic,
+                    schoolFlag,
+                    fallingDate,
+                    fallingMaple;
+
+                if (this.getBeingDisplayedGraduate()) {
+                    media = (<div>
+                        {this.getBeingDisplayedGraduate().graduatePicture ?
+                            <img src={this.getBeingDisplayedGraduate().graduatePicture} />
+                                 : ''}
+                        
+                        {this.getBeingDisplayedGraduate().graduateSound ?
+                                 <audio preload="auto" src={this.getBeingDisplayedGraduate().graduateSound} autoplay controls></audio>
+                                 : ''}
+
+                        {this.getBeingDisplayedGraduate().merit ?
+                                 <span className="merit">{this.getBeingDisplayedGraduate().merit}</span>
+                                 : ''}
+                         </div>);
+
+                    credential =  (<div>
+                            {this.getBeingDisplayedGraduate().graduateId ?
+                                <span className="graduateid">{this.getBeingDisplayedGraduate().graduateId}</span>
+                            : ''}
+                        </div>);
+
+                    fullname =  (<div>
+                            {this.getBeingDisplayedGraduate().isFullname == 'YES' ?
+                                (<div>
+                                     <span id="englishFullname" className="fullname">{this.getBeingDisplayedGraduate().fullname}</span>
+                                     <span id="arabicFullname" className="arabicfullname">{this.getBeingDisplayedGraduate().arabicFullname}</span>
+                                </div>)
+                                : 
+                                (<div>
+                                <span className="first">{this.getBeingDisplayedGraduate().firstName}</span>
+                                <span className="middle">{this.getBeingDisplayedGraduate().middleName}</span>
+                                <span className="last">{this.getBeingDisplayedGraduate().lastName}</span>
+                                </div>)
+                            }
+                     </div>);
+
+                    academic =  (
+                    <div>
+                        {this.getBeingDisplayedGraduate().program ?
+                        <span className="program">{this.getBeingDisplayedGraduate().program}</span>
+                        : ''
                         }
-                     </div>;
+
+                        {this.getBeingDisplayedGraduate().major ?
+                        <span className="major">{this.getBeingDisplayedGraduate().major}</span>
+                        : ''
+                        }
+                    </div>);
+
+                    schoolFlag =  (
+                    <div>
+                        {this.getBeingDisplayedGraduate().graduateImageSystemTemplateFlag ?
+                        <img id="flag" className="flag" src={this.getBeingDisplayedGraduate().graduateImageSystemTemplateFlag} />
+                        : ''
+                        }
+
+                    </div>);
+
+                    fallingDate =  (
+                    <div>
+                        {this.getBeingDisplayedGraduate().graduateImageSystemTemplateDate ?
+                        <span id="date" className="date">{this.getBeingDisplayedGraduate().graduateImageSystemTemplateDate}</span>
+                        : ''
+                        }
+
+                    </div>);
+
+
+                    fallingMaple =  (
+                    <div>
+                        {this.getBeingDisplayedGraduate().graduateImageSystemTemplateMaple ?
+                        <span id="maple" className="maple">{this.getBeingDisplayedGraduate().graduateImageSystemTemplateMaple }</span>
+                        : ''
+                        }
+                    </div>);
+
+                } else {
+                    fallingDate =  (
+                    <div>
+                            <span id="date" className="date">/images/system/1920x800/date-default.png</span>
+                    </div>);
+
+
+                    fallingMaple =  (
+                        <div>
+                           <span id="maple" className="maple">/images/system/1920x800/maple-default.png</span>
+                        </div>);
             }
-        });
 
-        React.render(<Teleprompt />, document.getElementById("content"));
+            return <div>
+                <div className={"main-wrapper " + (this.getFirstRun() ? 'firstRun' : 'running')}>
+                    <div className="container">
+                        <div className="media">
+                            {media}
+                        </div>
+                        <div className="profile">
+                            {credential}
 
-        
+                            <div id="fullname">
+                                {fullname}
+                            </div>
 
-    </script>
+                            <div className="academic">
+                                {academic}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="school-flag">
+                        {schoolFlag}
+                        {fallingDate}
+                        {fallingMaple}
+                    </div>
+
+                </div>
+            </div>;
+            }
+            });
+
+            React.render(<Teleprompt />, document.getElementById("content"));
+
+
+
+</script>
+
 <body class="layout-wrapper">
-    <div class="main-wrapper">>
-        <div id="content"></div>
-   </div>
-
-    <div class="school-flag">
-        <span id="date" class="date">/images/system/1920x800/maple-architecture.png</span>
-        <span id="maple" class="maple">/images/system/1920x800/date-architecture.png</span>
-    </div>
-
+    <div id="content">
+    </di>
 </body>
 </html>

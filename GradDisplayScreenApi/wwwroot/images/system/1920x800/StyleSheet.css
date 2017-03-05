@@ -1,18 +1,30 @@
 ﻿.layout-wrapper .main-wrapper {
-    background: url(bg.jpg) no-repeat;
-    width: 1920px;
+     width: 1920px;
     height: 800px;
     position: relative;
     top: 0;
     left: 0;
 }
 
-.layout-wrapper .main-wrapper.with-footer {
-    background: url(bg-with-footer.jpg) no-repeat;
-}
+    .layout-wrapper .main-wrapper.firstRun {
+        background: #fff url(bg-with-footer.jpg) no-repeat;
+    }
+
+        .layout-wrapper .main-wrapper.firstRun .flake {
+            display: none;
+        }
+
+    .layout-wrapper .main-wrapper.running {
+        background: #fff url(bg.jpg) no-repeat;
+    }
+
+        .layout-wrapper .main-wrapper.running .flake {
+            display: inline-block;
+        }
+
 
     /* profile */
-    .layout-wrapper .main-wrapper .profile {
+    .layout-wrapper .main-wrapper.running .profile {
         position: absolute;
         background: url(bg-profile.png) center center no-repeat;
         font-size: 75px;
@@ -23,25 +35,21 @@
         top: 218px;
     }
 
-        .layout-wrapper .main-wrapper .profile #fullname {
+        .layout-wrapper .main-wrapper.running .profile #fullname {
             text-align: center;
             margin-top:32px;
             width: 900px;
             height: 85px;
             display: block;
-            /* background:blue; */
         }
 
-        .layout-wrapper .main-wrapper .profile .arabicfullname,
-        .layout-wrapper .main-wrapper .profile .fullname {
-        }
 
-        .layout-wrapper .main-wrapper .profile .graduateid {
+        .layout-wrapper .main-wrapper.running .profile .graduateid {
             display: none;
         }
 
         /* academic */
-        .layout-wrapper .main-wrapper .profile .academic {
+        .layout-wrapper .main-wrapper.running .profile .academic {
             font-size: 30px;
             color: #fff;
             text-align: center;
@@ -50,8 +58,8 @@
             width: 100%;
         }
 
-            .layout-wrapper .main-wrapper .profile .academic .major,
-            .layout-wrapper .main-wrapper .profile .academic .program {
+            .layout-wrapper .main-wrapper.running .profile .academic .major,
+            .layout-wrapper .main-wrapper.running .profile .academic .program {
                 display: block;
                 width: 100%;
                 font-size: 24px;
@@ -62,21 +70,21 @@
             }
 
 
-            .layout-wrapper .main-wrapper .profile .academic .major {
+            .layout-wrapper .main-wrapper.running .profile .academic .major {
                 font-weight: normal;
             }
 
     /* media */
-    .layout-wrapper .main-wrapper .media {
+    .layout-wrapper .main-wrapper.running .media {
         position: absolute;
         background: url(bg-media.png) no-repeat;
-        top: 0px;
+        top: 0;
         left: 55px;
         width: 407px;
         height: 681px;
     }
 
-        .layout-wrapper .main-wrapper .media img {
+        .layout-wrapper .main-wrapper.running .media img {
             display: inline-block;
             position: relative;
             margin-top: 203px;
@@ -86,7 +94,7 @@
         }
 
 
-        .layout-wrapper .main-wrapper .media audio {
+        .layout-wrapper .main-wrapper.running .media audio {
             display: inline-block;
             visibility: hidden;
             width: 100%;
@@ -94,7 +102,7 @@
             line-height: 20px;
         }
 
-        .layout-wrapper .main-wrapper .media .merit {
+        .layout-wrapper .main-wrapper.running .media .merit {
             display: inline-block;
             padding-left: 20px;
             font-size: 22px;
@@ -105,7 +113,7 @@
         }
 
 
-    .layout-wrapper .main-wrapper .school-flag {
+    .layout-wrapper .main-wrapper.running .school-flag {
         display: block;
         position: absolute;
         right: 27px;
