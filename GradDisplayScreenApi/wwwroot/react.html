@@ -15,13 +15,24 @@
     <script type="text/jsx">
 
         var Teleprompt = React.createClass({
-            
+
             getInitialState: function() {
                 return { beingDisplayedGraduate: [], beingDisplayedGraduateId: 0, firstRun: 1 };
             },
         
             componentDidMount: function() {
+                
+                var _this = this;
+
                 setInterval(this.loadFromServer, 500);
+
+                document.addEventListener('ended', function(e){
+                    e.stopPropagation();
+
+                    _this.audioEnded();
+        
+                }, true);
+
             },
 
             getBeingDisplayedGraduate: function() {
@@ -30,6 +41,10 @@
 
             getFirstRun: function() {
                 return this.state.firstRun;
+            },
+
+            audioEnded: function() {
+                console.log('here' + Math.random());
             },
 
             loadFromServer: function() {
@@ -63,9 +78,8 @@
                             // trigger state change
                             // update the currently displayed graduate with the json result
                             if (json.graduateId != beingDisplayedGraduate) {
-
+                       
                                 this.setState( { beingDisplayedGraduate : json } );
-
                                
                             }
 
@@ -215,6 +229,16 @@
             React.render(<Teleprompt />, document.getElementById("content"));
 
 
+        (function ($) {
+
+            $(document).ready(function () {
+           
+                $('#graduateAudio').on("ended", function(e){
+                    e.stopPropagation();
+                    console.log("this is");
+                });
+            });
+        })(jQuery);
 
 </script>
 </head>

@@ -18,22 +18,13 @@
             cache: false
         });
 
-       
-       
 
         var interval = 5000;
 
         function refreshStuffs() {
-
-            /* $("#graduateAudio").on('ended', function () {
-                console.log('ended' + Math.random());
-            }); */ 
-
-            /**/
-            // queue
             $.get("/api/teleprompt", function (json) {
                 if (json) {
-                    console.log(json.message);
+                    //console.log(json.message);
                 }
             });
         }
@@ -44,7 +35,8 @@
 
 
     $(window).load(function () {
-  
+
+ 
         /*
            * falling items
            */
