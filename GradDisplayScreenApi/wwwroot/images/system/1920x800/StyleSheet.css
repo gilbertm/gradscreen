@@ -7,7 +7,7 @@
 }
 
     .layout-wrapper .main-wrapper.firstRun {
-        background: #fff url(bg-with-footer.jpg) no-repeat;
+        background: #fff url(bg-init.jpg) no-repeat;
     }
 
         .layout-wrapper .main-wrapper.firstRun .flake {

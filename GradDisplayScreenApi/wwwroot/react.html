@@ -4,18 +4,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>React Test</title>
-</head>
 
-<link rel="stylesheet" href="/css/site.css" type="text/css" />
-<link rel="stylesheet" href="/images/system/1920x800/StyleSheet.css" type="text/css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="/js/site.js"></script>
+    <link rel="stylesheet" href="/css/site.css" type="text/css" />
+    <link rel="stylesheet" href="/images/system/1920x800/StyleSheet.css" type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="/js/site.js"></script>
 
     <script type="text/jsx">
 
-        
         var Teleprompt = React.createClass({
             
             getInitialState: function() {
@@ -65,7 +63,10 @@
                             // trigger state change
                             // update the currently displayed graduate with the json result
                             if (json.graduateId != beingDisplayedGraduate) {
+
                                 this.setState( { beingDisplayedGraduate : json } );
+
+                               
                             }
 
                         }
@@ -90,7 +91,7 @@
                                  : ''}
                         
                         {this.getBeingDisplayedGraduate().graduateSound ?
-                                 <audio preload="auto" src={this.getBeingDisplayedGraduate().graduateSound} autoplay controls></audio>
+                                 <audio id="graduateAudio" preload="auto" src={this.getBeingDisplayedGraduate().graduateSound} autoPlay controls></audio>
                                  : ''}
 
                         {this.getBeingDisplayedGraduate().merit ?
@@ -160,6 +161,15 @@
                     </div>);
 
                 } else {
+
+                    media = (<div></div>);
+
+                    credential = (<div></div>);
+
+                    fullname = (<div></div>);
+
+                    academic = (<div></div>);
+
                     fallingDate =  (
                     <div>
                             <span id="date" className="date">/images/system/1920x800/date-default.png</span>
@@ -207,6 +217,7 @@
 
 
 </script>
+</head>
 
 <body class="layout-wrapper">
     <div id="content">

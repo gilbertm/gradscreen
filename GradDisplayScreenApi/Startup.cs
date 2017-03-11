@@ -31,6 +31,7 @@ namespace GradDisplayScreenApi
             GraduateDbContext.ConnectionString = Configuration["Data:CeremonialProfile:ConnectionString"];
             TelepromptDbContext.ConnectionString = Configuration["Data:CeremonialProfile:ConnectionString"];
             GradConfigDbContext.ConnectionString = Configuration["Data:CeremonialProfile:ConnectionString"];
+            QueueDbContext.ConnectionString = Configuration["Data:CeremonialProfile:ConnectionString"];
 
 
             // Add framework services.
@@ -38,6 +39,7 @@ namespace GradDisplayScreenApi
                 .AddEntityFrameworkSqlServer()
                 .AddDbContext<GraduateDbContext>()
                 .AddDbContext<GradConfigDbContext>()
+                .AddDbContext<QueueDbContext>()
                 .AddDbContext<TelepromptDbContext>();
 
             // Add framework services.

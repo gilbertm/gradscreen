@@ -5,9 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="wwwroot\images\system\1920x800\graduatestudent-default.png">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
     <Content Include="wwwroot\TextFile.txt" />
   </ItemGroup>
   <ItemGroup>

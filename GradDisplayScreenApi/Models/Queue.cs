@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GradDisplayScreenApi.Models
 {
-    public class Teleprompt
+    public class Queue
     {
         [Required]
         [Key]
@@ -12,20 +13,21 @@ namespace GradDisplayScreenApi.Models
 
         public DateTime Created { get; set; }
 
-        public Int16 Status { get; set; }
-
     }
 
-    public class TelepromptDbContext : DbContext
+    public class QueueDbContext : DbContext
     {
         public static string ConnectionString { get; set; }
+
+        public QueueDbContext(DbContextOptions<QueueDbContext> options) : base(options)
+        {
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(ConnectionString);
         }
 
-        public DbSet<Teleprompt> Teleprompt { get; set; }
-
+        public DbSet<Queue> Queue { get; set; }
     }
 }
