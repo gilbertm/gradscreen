@@ -18,13 +18,27 @@
             cache: false
         });
 
-
         var interval = 5000;
 
+        // for manual clicks
+        // remove this
+        // Reason: the controllers set the teleprompt status to
+        //         1 when the queue is empty and there is 
+        //         a singular teleprompt (display).
+        /*
+
+        $.get("/api/teleprompt", function (json) {
+            if (json) {
+                //console.log(json.message);
+            }
+         });
+
+        */
+
         function refreshStuffs() {
-            $.get("/api/teleprompt", function (json) {
-                if (json) {
-                    //console.log(json.message);
+            $.get("/api/teleprompt/reset", function (response) {
+                if (response == "force_reset_screen") {
+                    location.reload();
                 }
             });
         }

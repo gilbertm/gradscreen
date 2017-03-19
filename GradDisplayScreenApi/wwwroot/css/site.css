@@ -1,11 +1,40 @@
-﻿.layout-wrapper {
+﻿@font-face {
+    font-family: 'GE SS Two Bold';
+    src: url('../font/GE SS Two Bold.otf') format('opentype');
+}
+@font-face {
+    font-family: 'GE SS Two Light';
+    src: url('../font/GE SS Two Light.otf') format('opentype');
+}
+@font-face {
+    font-family: 'GESSTwoMedium-Medium';
+    src: url('../font/GESSTwoMedium-Medium.otf') format('opentype');
+}
+@font-face {
+    font-family: 'GESSTwoLight-Light';
+    src: url('../font/GESSTwoLight-Light.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'GothamHTF-Medium';
+    src: url('../font/GothamHTF-Medium.eot') format('embedded-opentype'), url('../font/GothamHTF-Medium.ttf') format('truetype'), url('../font/gothamhtf-medium-webfont.woff') format('woff'), url('../font/gothamhtf-medium-webfont.woff2') format('woff2');
+}
+
+.layout-wrapper {
     margin: 0;
     padding: 0;
 }
 
-.layout-wrapper .arabicfullname {
-    direction: rtl;
-}
+    .layout-wrapper .arabicfullname,
+    .layout-wrapper .fullname {
+        display:block;
+        width:100%;
+    }
+    
+    .layout-wrapper .arabicfullname {
+        direction: rtl;
+    }
+    
 
 .layout-wrapper #date {
     display:none;

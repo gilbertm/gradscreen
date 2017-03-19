@@ -51,7 +51,7 @@ namespace GradDisplayScreenApi.Controllers
             dict["message"] = "status normal";
             if (teleprompt != null)
             {
-                
+
                 if (teleprompt.Status == 1)
                 {
                     // remove the top of the queue
@@ -88,7 +88,7 @@ namespace GradDisplayScreenApi.Controllers
                             _contextGraduate.Update(graduate);
                             _contextGraduate.SaveChanges();
                         }
-                        
+
                     }
 
                     dict["message"] = "teleprompt cleaned and popped queue";
@@ -98,6 +98,53 @@ namespace GradDisplayScreenApi.Controllers
             }
 
             return Json(dict);
+        }
+
+        [HttpPost]
+        [Route("/api/teleprompt/set/status")]
+        public string SetTelepromptStatus(int status = 0)
+        {
+            /* get the teleprompt */
+            var teleprompt = _contextTeleprompt.Teleprompt.FirstOrDefault();
+
+            if (teleprompt != null)
+            {
+                teleprompt.Status = 1;
+                _contextTeleprompt.Update(teleprompt);
+                _contextTeleprompt.SaveChanges();
+
+                return "success";
+            }
+
+            return "failed";
+        }
+
+        [HttpGet]
+        [Route("/api/teleprompt/reset")]
+        public string TelepromptOkayToReset()
+        {
+            /* get the teleprompt */
+            var configShowInitialScreen = _contextGradConfig.GradConfig.FirstOrDefault(c => c.Name == "ShowInitialScreen" && c.UserId == "Global");
+
+            if (configShowInitialScreen != null)
+            {
+                int iConf = Int32.Parse(configShowInitialScreen.Value);
+
+                if (iConf == 1)
+                {
+
+                    var teleprompt = _contextTeleprompt.Teleprompt.FirstOrDefault();
+                    var queue = _contextQueue.Queue.FirstOrDefault();
+
+
+                    if (teleprompt == null && queue == null)
+                    {
+                        return "force_reset_screen";
+                    }
+
+                }
+            }
+            return "cant_force_reset";
         }
     }
 }
