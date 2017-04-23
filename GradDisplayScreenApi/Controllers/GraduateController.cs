@@ -166,11 +166,11 @@ namespace GradDisplayScreenApi.Controllers
                         // voice
                         if (!String.IsNullOrEmpty(voicePerson) && !String.IsNullOrEmpty(voiceExtra))
                         {
-                            string filePathSound = String.Concat(_hostEnvironment.WebRootPath, "\\", Configuration["Custom:Resources:data"], "\\", Configuration["Custom:Resources:Sounds:data"], "\\", voicePerson, "\\", voiceExtra, "\\", vGraduate.GraduateId, ".wav");
+                            string filePathSound = String.Concat(_hostEnvironment.WebRootPath, "\\", Configuration["Custom:Resources:data"], "\\", Configuration["Custom:Resources:Sounds:data"], "\\", voicePerson, "\\", voiceExtra, "\\", vGraduate.GraduateId, ".", Configuration["Custom:Resources:Sounds:type"]);
 
                             if (System.IO.File.Exists(filePathSound))
                             {
-                                vGraduate.GraduateSound = String.Concat("/", Configuration["Custom:Resources:data"], "/", Configuration["Custom:Resources:Sounds:data"], "/", voicePerson, "/", voiceExtra, "/", vGraduate.GraduateId, ".wav");
+                                vGraduate.GraduateSound = String.Concat("/", Configuration["Custom:Resources:data"], "/", Configuration["Custom:Resources:Sounds:data"], "/", voicePerson, "/", voiceExtra, "/", vGraduate.GraduateId, ".", Configuration["Custom:Resources:Sounds:type"]);
 
                             }
                         }
@@ -178,11 +178,11 @@ namespace GradDisplayScreenApi.Controllers
                         {
                             // no defaults
                             // use the root location 
-                            string filePathSound = String.Concat(_hostEnvironment.WebRootPath, "\\", Configuration["Custom:Resources:data"], "\\", Configuration["Custom:Resources:Sounds:data"], "\\", vGraduate.GraduateId, ".wav");
+                            string filePathSound = String.Concat(_hostEnvironment.WebRootPath, "\\", Configuration["Custom:Resources:data"], "\\", Configuration["Custom:Resources:Sounds:data"], "\\", vGraduate.GraduateId, ".", Configuration["Custom:Resources:Sounds:type"]);
 
                             if (System.IO.File.Exists(filePathSound))
                             {
-                                vGraduate.GraduateSound = String.Concat("/", Configuration["Custom:Resources:data"], "/", Configuration["Custom:Resources:Sounds:data"], "/", vGraduate.GraduateId, ".wav");
+                                vGraduate.GraduateSound = String.Concat("/", Configuration["Custom:Resources:data"], "/", Configuration["Custom:Resources:Sounds:data"], "/", vGraduate.GraduateId, ".", Configuration["Custom:Resources:Sounds:type"]);
                             }
                         }
 
